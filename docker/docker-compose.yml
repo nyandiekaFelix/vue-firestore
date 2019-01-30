@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+  dev:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command: yarn serve
+    ports:
+      - 8080:8080
+  # prod:
