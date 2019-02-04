@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <span>This is the main App page!!</span>
+    <navigation></navigation>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import Navigation from './components/Navigation';
 
 export default {
-  name: 'app'
+  name: 'app',
+  components: { navigation: Navigation }
 }
 </script>
 
@@ -19,6 +23,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: rgba(52, 73, 94,0.3);
+  height: 100vh;
 }
 </style>
