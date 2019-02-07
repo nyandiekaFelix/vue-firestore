@@ -3,6 +3,7 @@ export default [
     budgetId: 1,
     name: 'Recurrent Bills',
     amount: 40000,
+
     items: [
       {
         itemId: 1,

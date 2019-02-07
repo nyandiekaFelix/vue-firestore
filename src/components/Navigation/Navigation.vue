@@ -22,25 +22,10 @@
 </template>
 
 <script>
+import './navigation.scss';
+
 export default {
   name: 'Navigation'
-}
+};
 </script>
-
-<style>
-.nav-custom{
-  background-color: #41B883 !important;
-  padding: 0 10px;
-  margin-bottom: 20px;
-}
-a, a:hover, .nav-link {
-  color: #34495E !important;
-  text-decoration: none;
-}
-
-.dropdown-menu{
-  margin-top: 8px;
-  border-radius: 0;
-}
-</style>
 
