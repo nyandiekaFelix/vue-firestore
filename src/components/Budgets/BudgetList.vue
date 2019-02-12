@@ -17,8 +17,9 @@
       </div>
       <div class="table-body">
         <budget-item
-          v-for="budget in budgets"
-          :key="budget.budgetId"
+          v-for="(budget, index) in budgets"
+          :key="index"
+          :identifier="index + 1"
           :budget="budget">
         </budget-item>
       </div>
@@ -27,14 +28,34 @@
 </template>
 
 <script>
-import BudgetItem from './BudgetItem';
-import budgets from '../../mocks.js';
+import BudgetListItem from './BudgetListItem';
+import { db } from '../../firebase';
 import './budgets.scss';
 
 export default {
   name: 'Budget',
-  components: { 'budget-item': BudgetItem },
-  data() { return { budgets } },
+  components: { 'budget-item': BudgetListItem },
+
+  data() {
+    return {
+      budgets: [],
+      budgetsRef: db.collection('budgets'),
+    }
+  },
+
+  async created() { await this.getBudgets(); },
+
+  methods: {
+    async getBudgets() {
+      const data = await this.budgetsRef.get();
+      data.forEach(budget => {
+        this.budgets.push({
+          budgetId: budget.id,
+          ...budget.data()
+        });
+      });
+    }
+  },
 }
 </script>
 
