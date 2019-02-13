@@ -13,7 +13,7 @@
         <div class="cell budget-id"><strong>#</strong></div>
         <div class="cell budget-name"><strong>Name</strong></div>
         <div class="cell budget-amount"><strong>Amount</strong></div>
-        <div class="cell budget-items"><strong>No. Items</strong></div>
+        <div class="cell budget-time"><strong>Created</strong></div>
       </div>
       <div class="table-body">
         <budget-item
@@ -40,7 +40,7 @@ export default {
     return {
       budgets: [],
       budgetsRef: db.collection('budgets'),
-    }
+    };
   },
 
   async created() { await this.getBudgets(); },
@@ -51,10 +51,10 @@ export default {
       data.forEach(budget => {
         this.budgets.push({
           budgetId: budget.id,
-          ...budget.data()
+          ...budget.data(),
         });
       });
-    }
+    },
   },
 }
 </script>

@@ -3,43 +3,40 @@
     <div class="cell budget-id">{{ identifier }}</div>
     <div class="cell budget-name">{{ name }}</div>
     <div class="cell budget-amount">{{ amount }}</div>
-    <div class="cell budget-items">{{ items.length }}</div>
+    <div class="cell budget-time">{{ readableTime }}</div>
   </div>
 </template>
 
 <script>
-import { db } from '../../firebase';
-
 export default {
   props: {
     budget: { type: Object, required: true },
     identifier: { type: Number, required: true }
   },
-  name: 'BudgetItem',
+  name: 'BudgetListItem',
 
   data() {
     const { budgetId, name, amount } = this.budget;
-    return {
-      budgetId, name, amount,
-      items: [],
-      itemsRef: db.collection('budgets').doc(`${budgetId}`).collection('items'),
-    };
+    return { budgetId, name, amount };
   },
 
-  async created() { await this.getItems(); },
+  computed: {
+    readableTime() {
+      const { created: timeCreated } = this.budget;
+      const time = timeCreated.toDate();
+      const shortened = this.shortenTime(`${time}`);
+      return shortened;
+    },
+  },
+
+  async created() {  },
 
   methods: {
     viewOne() {
       this.$router.push({ name:'BudgetView', params: { id: this.budgetId }});
     },
-    async getItems(budget) {
-      const items = await this.itemsRef.get();
-      items.forEach(item => {
-        this.items.push({
-          itemId: item.id,
-          ...item.data()
-        });
-      });
+    shortenTime(str) {
+      return str.split(' ').slice(0, 4).join(' ');
     }
   }
 };
