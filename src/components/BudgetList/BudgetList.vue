@@ -30,7 +30,7 @@
 <script>
 import BudgetListItem from './BudgetListItem';
 import { db } from '../../firebase';
-import './budgets.scss';
+import './budget-list.scss';
 
 export default {
   name: 'Budget',

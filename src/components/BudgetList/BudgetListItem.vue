@@ -24,8 +24,7 @@ export default {
     readableTime() {
       const { created: timeCreated } = this.budget;
       const time = timeCreated.toDate();
-      const shortened = this.shortenTime(`${time}`);
-      return shortened;
+      return `${time}`.split(' ').slice(0, 4).join(' ');;
     },
   },
 
@@ -35,9 +34,6 @@ export default {
     viewOne() {
       this.$router.push({ name:'BudgetView', params: { id: this.budgetId }});
     },
-    shortenTime(str) {
-      return str.split(' ').slice(0, 4).join(' ');
-    }
   }
 };
 </script>
