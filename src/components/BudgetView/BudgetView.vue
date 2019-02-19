@@ -7,21 +7,28 @@
 </template>
 
 <script>
+import { db } from '../../firebase';
+import { firebaseQuery } from '../../helpers/api.js';
+
 export default {
   name: 'BudgetView',
   data() {
-
+    const{ params: { id: budgetId }} = this.$route;
+    return {
+      budgetId,
+      items: [],
+      itemsRef: db.collection('budgets').doc(`${budgetId}`).collection('items'),
+    };
   },
 
-  async created() {
-   this.getBudget();
-  },
+  async created() { await this.getBudget(); },
 
   methods: {
-    getBudget() {
-      const{ params: { id }} = this.$route;
-      console.log('id', id);
+    async getBudget() {
+      const{ params: { id: budgetId }} = this.$route;
+      this.items = await firebaseQuery(this.itemsRef);
     },
+    async create() {},
   },
   computed: {}
 };

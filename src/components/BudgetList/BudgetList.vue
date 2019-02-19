@@ -30,6 +30,7 @@
 <script>
 import BudgetListItem from './BudgetListItem';
 import { db } from '../../firebase';
+import { firebaseQuery } from '../../helpers/api.js';
 import './budget-list.scss';
 
 export default {
@@ -43,18 +44,12 @@ export default {
     };
   },
 
-  async created() { await this.getBudgets(); },
+  async created() {
+    this.budgets = await firebaseQuery(this.budgetsRef);
+  },
 
   methods: {
-    async getBudgets() {
-      const data = await this.budgetsRef.get();
-      data.forEach(budget => {
-        this.budgets.push({
-          budgetId: budget.id,
-          ...budget.data(),
-        });
-      });
-    },
+    async create() {},
   },
 }
 </script>

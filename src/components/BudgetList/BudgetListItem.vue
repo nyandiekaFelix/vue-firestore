@@ -16,7 +16,7 @@ export default {
   name: 'BudgetListItem',
 
   data() {
-    const { budgetId, name, amount } = this.budget;
+    const { itemId: budgetId, name, amount } = this.budget;
     return { budgetId, name, amount };
   },
 
@@ -24,16 +24,17 @@ export default {
     readableTime() {
       const { created: timeCreated } = this.budget;
       const time = timeCreated.toDate();
-      return `${time}`.split(' ').slice(0, 4).join(' ');;
+      return `${time}`.split(' ').slice(0, 4).join(' ');
     },
   },
 
-  async created() {  },
-
   methods: {
-    viewOne() {
+    async viewOne() {
       this.$router.push({ name:'BudgetView', params: { id: this.budgetId }});
     },
-  }
+
+    async edit() {},
+    async delete() {},
+  },
 };
 </script>

@@ -4,7 +4,7 @@
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
     <b-navbar-brand>
-      <router-link to="/" class="nav-link">Money Matters</router-link>
+      <router-link to="/" class="nav-link">Where's The Money?</router-link>
     </b-navbar-brand>
 
     <b-collapse is-nav id="nav_collapse">
